@@ -13,12 +13,15 @@
         <div class="form-group col-6">
             <div>
                 <h3>Title</h3>
-                <input type="text" name="title" value="{{$post->title}}">
+                <input type="text" name="title" value="{{old('title') ?? $post->title}}">
+                <div class="alert-danger">{{$errors->first('title')}}</div>
+
             </div>
 
             <div>
                 <h3>Description</h3>
-                <textarea name="description" id="" cols="30" rows="10" >{{$post->description}}</textarea>
+                <textarea name="description" id="" cols="30" rows="10" >{{old('description') ?? $post->description}}</textarea>
+                <div class="alert-danger">{{$errors->first('description')}}</div>
             <button type="submit">Update</button>
             </div>
         </div>

@@ -38,7 +38,7 @@ class PostController extends Controller
     public function store(Request $request)
     {
 
-        Post::create($request->all());
+        Post::create($this->validateRequest($request));
         return redirect('posts');
     }
 
@@ -76,7 +76,7 @@ class PostController extends Controller
     {
 /*        dump($request->all());
         dd($post);*/
-        $post->update($request->all());
+        $post->update($this->validateRequest($request));
         return redirect('/posts');
     }
 
@@ -91,5 +91,12 @@ class PostController extends Controller
     {
         $post->delete();
         return redirect('/posts');
+    }
+    public function validateRequest($request)
+    {
+        return $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+        ]);
     }
 }
